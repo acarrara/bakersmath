@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baker's Math</title>
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap&text=FlourQantiyRxesWOh1234567890%" rel="stylesheet">
+    <style type="text/css">
+
+        * {
+            box-sizing: border-box;
+            color: black;
+        }
+
+        body, html {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-family: "Inconsolata", sans-serif;
+        }
+
+        .container {
+            max-width: 60rem;
+            height: 100vh;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            flex-direction: column;
+        }
+        
+        .grid-container {
+            background-color: black;
+            height: 100vmin;
+            width: 100vmin;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            flex-grow: 0;
+        }
+        
+        .total-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: auto repeat(3, 1fr);
+            grid-template-rows: auto repeat(3, 1fr);
+            grid-gap: 1rem;
+            height: 100%;
+            width: 100%;
+        }
+
+        .grid-item {
+            background-color: white;
+
+            position: relative;
+
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            padding-bottom: 2rem;
+            padding-right: 2rem;
+        }
+
+        .quantity {
+            font-size: 8rem;
+        }
+
+        .percentage-container {
+            font-size: 3rem;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60%;
+            border-bottom: 0.75rem solid black;
+            border-right: 0.75rem solid black;
+            border-bottom-right-radius: 1rem;
+
+            display: inline-flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+
+            background-color: white;
+
+            font-family: "Inconsolata", sans-serif;
+        }
+
+        .percentage {
+            font-size: inherit;
+            font-family: inherit;
+            width: inherit;
+
+            border: 0;
+
+            text-align: right;
+
+            padding: 0.5rem 0;
+
+            cursor: pointer;
+        }
+
+        .percentage-container:after {
+            position: relative;
+            align-self: center;
+            content: '\0025';
+            display: block;
+            font-family: "Inconsolata", sans-serif;
+            font-size: 3rem;
+
+            padding-right: 0.5rem;
+        }
+
+        .input-big {
+            text-align: right;
+            font-size: inherit;
+            font-family: inherit;
+            width: calc(100% - 2rem);
+            border: 0.5rem black solid;
+            background: white;
+            border-radius: 1rem;
+
+            cursor: pointer;
+
+            margin-left: 2rem;
+        }
+
+        .flour {
+            background-color: lightyellow;
+        }
+
+        .water {
+            background-color: aliceblue;
+        }
+
+        .levain {
+            background-color: navajowhite;
+        }
+
+        .salt {
+            background-color: lightgray;
+        }
+
+        .fat {
+            background-color: darkkhaki;
+        }
+
+        .grid-title {
+            font-size: 2rem;
+            font-family: "Inconsolata", sans-serif;
+            background-color: white;
+
+            padding: 0.5rem;
+
+            text-align: center;
+        }
+
+        .ttb {
+            writing-mode: vertical-lr;
+            writing-mode: sideways-lr;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type='number'] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="grid-container">
+        <div class="grid">
+            <div class="grid-title"></div>
+            <div class="grid-title">Quantity</div>
+            <div class="grid-title">Roux</div>
+            <div class="grid-title">Rest</div>
+            <div class="grid-title ttb">Flour</div>
+            <div class="grid-item flour">
+                <div class="quantity">
+                    <input class="input-big" value="300">
+                </div>
+            </div>
+            <div class="grid-item flour">
+                <div class="percentage-container">
+                    <input class="percentage" value="10" type="number">
+                </div>
+                <div id="rouxFlour" class="quantity">30</div>
+            </div>
+            <div class="grid-item flour">
+                <div id="restFlour" class="quantity">270</div>
+            </div>
+            <div class="grid-title ttb">Water</div>
+            <div class="grid-item water">
+                <div class="percentage-container">
+                    <input id="totalWaterPercentage" class="percentage" value="80" type="number">
+                </div>
+                <div id="totalWater" class="quantity">240</div>
+            </div>
+            <div class="grid-item water">
+                <div id="rouxWater" class="quantity">150</div>
+            </div>
+            <div class="grid-item water">
+                <div id="restWater" class="quantity">90</div>
+            </div>
+            <div class="grid-title ttb">Other</div>
+            <div class="grid-item levain">
+                <div class="percentage-container">
+                    <input id="levainPercentage" class="percentage" value="20" type="number">
+                </div>
+                <div id="levain" class="quantity">60</div>
+            </div>
+            <div class="grid-item salt">
+                <div class="percentage-container">
+                    <input id="saltPercentage" class="percentage" value="2" type="number">
+                </div>
+                <div id="salt" class="quantity">6</div>
+            </div>
+            <div class="grid-item fat">
+                <div class="percentage-container">
+                    <input id="fatPercentage" class="percentage" value="3" type="number">
+                </div>
+                <div id="fat" class="quantity">9</div>
+            </div>
+        </div>
+    </div>
+    <div class="total-container">
+        <div class="quantity" id="total">615</div>
+    </div>
+</div>
+
+<script>
+    const inputElement = document.querySelector('.input-big');
+    const totalWaterPercentageElement = document.querySelector('#totalWaterPercentage');
+    const levainPercentageElement = document.querySelector('#levainPercentage');
+    const saltPercentageElement = document.querySelector('#saltPercentage');
+    const fatPercentageElement = document.querySelector('#fatPercentage');
+    const totalElement = document.querySelector('#total');
+
+    function update(onePercent, selector, percentage) {
+        const toUpdateElement = document.querySelector(selector);
+        const value = Math.round(onePercent * percentage);
+        toUpdateElement.innerHTML = value;
+        return value;
+    }
+
+    function updateAll() {
+        const onePercent = inputElement.value / 100;
+        update(onePercent, '#rouxFlour', 10);
+        update(onePercent, '#restFlour', 90);
+        update(onePercent, '#rouxWater', 50);
+        update(onePercent, '#restWater', totalWaterPercentageElement.value - 50);
+        const waterValue = update(onePercent, '#totalWater', totalWaterPercentageElement.value);
+        const levainValue = update(onePercent, '#levain', levainPercentageElement.value);
+        const saltValue = update(onePercent, '#salt', saltPercentageElement.value);
+        const fatValue = update(onePercent, '#fat', fatPercentageElement.value);
+
+        totalElement.innerHTML = Number(inputElement.value) + waterValue + levainValue + saltValue + fatValue;
+    }
+
+    inputElement.addEventListener('input', updateAll);
+    totalWaterPercentageElement.addEventListener('input', updateAll);
+    levainPercentageElement.addEventListener('input', updateAll);
+    saltPercentageElement.addEventListener('input', updateAll);
+    fatPercentageElement.addEventListener('input', updateAll);
+</script>
+
+</body>
+
+</html>
